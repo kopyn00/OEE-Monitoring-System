@@ -1,0 +1,65 @@
+services:
+  grafana:
+    image: grafana/grafana:12.0.1
+    container_name: grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_USER}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD}
+    volumes:
+      - /home/service/docker_data/grafana_data:/var/lib/grafana
+      - /home/service/docker_data/grafana_logs:/var/log/grafana
+    networks:
+      - monitoring_net
+
+  timescaledb_go:
+    image: timescale/timescaledb:2.14.2-pg15
+    container_name: timescaledb_go
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - /home/service/docker_data/timescale_data_go:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - monitoring_net
+
+  go_app:
+    build:
+      context: ./go_app
+    container_name: go_app
+    restart: always
+    environment:
+      GOTRACEBACK: crash
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      MQTT_BROKER: ${MQTT_BROKER}
+      MQTT_PORT: ${MQTT_PORT}
+      MQTT_USER: ${MQTT_USER}
+      MQTT_PASSWORD: ${MQTT_PASSWORD}
+      ANALYZER_IP01: ${ANALYZER_IP01}
+      ANALYZER_IP02: ${ANALYZER_IP02}
+      ANALYZER_IP03: ${ANALYZER_IP03}
+      ANALYZER_IP04: ${ANALYZER_IP04}
+      ANALYZER_IP05: ${ANALYZER_IP05}
+      TZ: Europe/Warsaw
+    volumes:
+      - ./go_app/logs:/app/logs
+      - /etc/localtime:/etc/localtime:ro
+      - /usr/share/zoneinfo:/usr/share/zoneinfo:ro
+    depends_on:
+      - timescaledb_go
+    networks:
+      - monitoring_net
+
+networks:
+  monitoring_net:
+    driver: bridge

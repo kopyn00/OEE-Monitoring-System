@@ -1,0 +1,35 @@
+CREATE TABLE IF NOT EXISTS measurements (
+    timestamp     TIMESTAMPTZ       NOT NULL,
+    device_id     SMALLINT          NOT NULL,
+    f             REAL,
+    u1            REAL,
+    u2            REAL,
+    u3            REAL,
+    u12           REAL,
+    u23           REAL,
+    u31           REAL,
+    i1            REAL,
+    i2            REAL,
+    i3            REAL,
+    i_n           REAL,
+    p1            REAL,
+    p2            REAL,
+    p3            REAL,
+    q1            REAL,
+    q2            REAL,
+    q3            REAL,
+    s1            REAL,
+    s2            REAL,
+    s3            REAL,
+    pf1           REAL,
+    pf2           REAL,
+    pf3           REAL,
+    p             REAL,
+    q             REAL,
+    s             REAL,
+    pf            REAL,
+    PRIMARY KEY (timestamp, device_id)
+);
+
+-- Konwersja na hypertable
+SELECT create_hypertable('measurements', 'timestamp', if_not_exists => TRUE);
