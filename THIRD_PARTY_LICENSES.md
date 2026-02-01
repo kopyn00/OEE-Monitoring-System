@@ -111,42 +111,6 @@ Copyright © 2021 lstn
 
 ---
 
-### 10. prometheus-community/postgres_exporter  
-**License:** Apache License 2.0  
-**Link:** https://github.com/prometheus-community/postgres_exporter/blob/main/LICENSE
-
-This exporter provides metrics from a PostgreSQL server for Prometheus.
-
-It is included in this application under the Apache License 2.0. No modifications or redistribution are made.
-
-Copyright © 2015–Present The Prometheus Authors
-
----
-
-### 11. Prometheus  
-**License:** Apache License 2.0  
-**Link:** https://github.com/prometheus/prometheus/blob/main/LICENSE
-
-Prometheus is a monitoring system and time series database.
-
-It is used in this application under the Apache License 2.0. The software is included unmodified and is not redistributed or hosted publicly.
-
-Copyright © 2012–Present The Prometheus Authors
-
----
-
-### 12. prometheus/node_exporter  
-**License:** Apache License 2.0  
-**Link:** https://github.com/prometheus/node_exporter/blob/main/LICENSE
-
-Node Exporter is used to expose hardware and OS metrics for Prometheus monitoring.
-
-It is included under the Apache License 2.0. The software is not modified or redistributed.
-
-Copyright © 2013–Present The Prometheus Authors
-
----
-
 ### Appendix: BSD 3-Clause License (used by golang.org/x/net and golang.org/x/sync)
 
 Copyright (c) 2009 The Go Authors  
