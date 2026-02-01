@@ -35,4 +35,4 @@ This software includes third-party open-source components. Their respective lice
 
 ---
 
-If you have any questions about licensing, please contact: **[]**
+If you have any questions about licensing, please contact.
